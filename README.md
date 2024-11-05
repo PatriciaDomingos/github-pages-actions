@@ -1,9 +1,5 @@
-# NEWWWWW
+# How Much Do You Like DevOps?
 
-
-            Embark on a journey to master the art of continuous integration 
-            and continuous deployment. Embrace the DevOps philosophy, 
-            where collaboration and automation create seamless delivery pipelines.
-        
+Description not available.
 
 This README was generated automatically from index.html.
