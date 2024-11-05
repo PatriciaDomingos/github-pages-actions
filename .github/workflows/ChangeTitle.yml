@@ -1,0 +1,33 @@
+name: Change Page Title Based on Input
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'New page title'
+        required: true
+        default: 'Default Page Title'
+
+jobs:
+  change-title:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set new page title
+        run: |
+          # Get the title input from the GitHub Action
+          NEW_TITLE="${{ github.event.inputs.title }}"
+          
+          # Use sed to find and replace the title tag in index.html (or any other file)
+          sed -i "s|<title>.*</title>|<title>${NEW_TITLE}</title>|" index.html
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "your-email@example.com"
+          git add index.html
+          git commit -m "Update page title to ${NEW_TITLE}"
+          git push origin main
