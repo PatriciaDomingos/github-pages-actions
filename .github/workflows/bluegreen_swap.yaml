@@ -1,0 +1,36 @@
+name: Swap index.html Content
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  swap-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Swap index.html with index_v2.html
+        run: |
+          # Check if the file index_v2.html exists
+          if [ -f "index_v2.html" ]; then
+            echo "Swapping the contents of index.html with index_v2.html"
+            cp index_v2.html index.html
+          else
+            echo "ERROR: index_v2.html not found!"
+            exit 1
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Swap contents of index.html with index_v2.html"
+          git push origin main
