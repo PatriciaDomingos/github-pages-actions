@@ -20,3 +20,15 @@ jobs:
         run: |
           chmod +x ./check-title.sh
           ./check-title.sh
+          
+      - name: Proceed with the pipeline (if title tag exists)
+        if: success()  # This ensures the next step runs only if the previous step was successful
+        run: |
+          echo "Proceeding with the rest of the pipeline since the title tag exists."
+          # Add additional steps here for further actions, e.g., building, testing, etc.
+          
+      - name: Abort pipeline (if title tag is missing)
+        if: failure()  # This ensures this step runs only if the previous step failed
+        run: |
+          echo "Aborting pipeline because the title tag is missing from index.html."
+          
