@@ -37,4 +37,5 @@ jobs:
           // Generate README content
           const readmeContent = \`# \${title}\n\n\${description}\n\nThis README was generated automatically from index.html.\`;
           // Write to README.md
-          fs.writeFileSync('README.md', readmeContent);"
+          fs.writeFileSync('README.md', readmeContent);
+          "
